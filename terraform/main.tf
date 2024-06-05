@@ -1,12 +1,13 @@
 provider "aws" {
-  region = "us-west-2"
+  region = var.aws_region
 }
 
 resource "aws_s3_bucket" "original_images" {
-  bucket = "original-images-bucket"
+  bucket = var.original_images_bucket_name
 }
+
 resource "aws_s3_bucket" "thumbnails" {
-  bucket = "thumbnails-bucket"
+  bucket = var.thumbnails_bucket_name
 }
 
 resource "aws_iam_role" "iam_for_lambda" {
@@ -25,24 +26,42 @@ resource "aws_iam_role" "iam_for_lambda" {
   })
 }
 
+resource "aws_iam_role_policy" "policy" {
+  name = "policy"
+  role = aws_iam_role.iam_for_lambda.id
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "logs:*",
+          "s3:*",
+        ],
+        Effect = "Allow",
+        Resource = "*",
+      },
+    ],
+  })
+}
+
 resource "aws_lambda_function" "thumbnail_generator" {
   filename         = "lambda_function_payload.zip"
-  function_name    = "thumbnail_generator"
+  function_name    = var.lambda_function_name
   role             = aws_iam_role.iam_for_lambda.arn
-  handler          = "lambda_function.lambda_handler"
-  runtime          = "python3.8"
+  handler          = var.lambda_handler
+  runtime          = var.lambda_runtime
   source_code_hash = filebase64sha256("lambda_function_payload.zip")
 }
 
 resource "aws_api_gateway_rest_api" "api" {
-  name        = "thumbnail-api"
+  name        = var.api_gateway_name
   description = "API for thumbnail generation"
 }
 
 resource "aws_api_gateway_resource" "resource" {
   rest_api_id = aws_api_gateway_rest_api.api.id
   parent_id   = aws_api_gateway_rest_api.api.root_resource_id
-  path_part   = "generate-thumbnail"
+  path_part   = var.api_gateway_resource_path
 }
 
 resource "aws_api_gateway_method" "method" {
