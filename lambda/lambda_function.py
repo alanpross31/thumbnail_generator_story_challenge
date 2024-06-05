@@ -1,6 +1,6 @@
 import boto3
 from PIL import Image
-import io
+import ios
 
 def lambda_handler(event, context):
     s3 = boto3.client('s3')
@@ -11,7 +11,7 @@ def lambda_handler(event, context):
     response = s3.get_object(Bucket=bucket_name, Key=key)
     image_content = response['Body'].read()
 
-    # Create a thumbnail
+    # Create a thumbnail image
     image = Image.open(io.BytesIO(image_content))
     image.thumbnail((128, 128))
 
