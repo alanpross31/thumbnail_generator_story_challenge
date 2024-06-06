@@ -81,3 +81,6 @@ To run this setup:
 
 - Deploy the packaged Lambda function code to AWS.
 - Terraform handles the linking of API Gateway and Lambda, setting up triggers, and configuring permissions.
+
+![arquitecture_stori](https://github.com/alanpross31/thumbnail_generator_story_challenge/assets/70664639/70fe8170-8ab2-493c-9708-deaa7b34f9cf)
+
