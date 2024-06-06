@@ -84,3 +84,17 @@ To run this setup:
 
 ![arquitecture_stori](https://github.com/alanpross31/thumbnail_generator_story_challenge/assets/70664639/70fe8170-8ab2-493c-9708-deaa7b34f9cf)
 
+## Strengths 
+Scalability
+-  The system can handle a large number of users at the same time without any issues.
+-  Whether there are 10 users or 10,000 users uploading images, the service will work smoothly without slowing down.
+
+Cost Efficiency
+-  The system only costs money when it's being used, rather than charging a flat rate regardless of usage.
+- This is a cost-effective solution, especially for small businesses or projects with varying amounts of traffic. You save money because you only pay for what you use.
+
+Simplicity
+- The system uses services that are managed by AWS, so we don't have to worry about the technical details of maintaining them.
+- This makes the system easier to set up and manage, allowing us to focus on building the core functionality rather than worrying about server maintenance.
+
+
