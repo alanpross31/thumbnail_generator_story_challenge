@@ -97,4 +97,16 @@ Simplicity
 - The system uses services that are managed by AWS, so we don't have to worry about the technical details of maintaining them.
 - This makes the system easier to set up and manage, allowing us to focus on building the core functionality rather than worrying about server maintenance.
 
+Security
+- The system uses strict rules to ensure that each part only has access to what it needs.
+- This reduces the risk of unauthorized access or data breaches, keeping users' images safe.
+
+## Weaknesses
+
+Cold Start Latency
+- Sometimes, when the service hasn’t been used for a while, there might be a slight delay when it starts up again.
+- This can cause a few seconds of delay for the first user after a period of inactivity, which might be noticeable and slightly inconvenient.
+
+Debunggin
+- When something goes wrong, it can be harder to figure out the problem because the system is made up of many different parts working together.Especilly if we add the fronted and some databses to stored metada.
 
